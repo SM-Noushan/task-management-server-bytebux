@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 
 const url = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.b6wqjn1.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`;
 const dbName = "byteBux-taskManagement";
@@ -6,6 +6,7 @@ const dbName = "byteBux-taskManagement";
 let db;
 
 const connectDB = async () => {
+  console.log("Pinged your deployment. You successfully connected to MongoDB!");
   // Return the cached connection if it already exists
   if (db) return db;
   // Create a MongoClient with a MongoClientOptions object to set the Stable API version
