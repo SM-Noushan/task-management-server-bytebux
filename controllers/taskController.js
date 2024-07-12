@@ -8,6 +8,18 @@ const getAllTasks = async (req, res) => {
   res.json(tasks);
 };
 
+// Update an existing task by ID
+const updateTask = async (req, res) => {
+  const { id } = req.params;
+  const updatedTask = req.body;
+  const tasksCollection = await getTasksCollection();
+  const result = await tasksCollection.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: updatedTask }
+  );
+  res.json(result);
+};
+
 // Delete a task by ID
 const deleteTask = async (req, res) => {
   const { id } = req.params;
@@ -21,4 +33,5 @@ const deleteTask = async (req, res) => {
 module.exports = {
   getAllTasks,
   deleteTask,
+  updateTask,
 };
