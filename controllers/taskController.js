@@ -8,6 +8,17 @@ const getAllTasks = async (req, res) => {
   res.json(tasks);
 };
 
+// Retrieve a specific task by ID
+const getTaskById = async (req, res) => {
+  console.log("get task by id");
+  const { id } = req.params;
+  const tasksCollection = await getTasksCollection();
+  const task = await tasksCollection.findOne({
+    _id: new ObjectId(id),
+  });
+  res.json(task);
+};
+
 // Create a new task
 const createTask = async (req, res) => {
   const newTask = req.body;
@@ -40,6 +51,7 @@ const deleteTask = async (req, res) => {
 
 module.exports = {
   getAllTasks,
+  getTaskById,
   createTask,
   deleteTask,
   updateTask,
