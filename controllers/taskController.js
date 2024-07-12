@@ -8,6 +8,14 @@ const getAllTasks = async (req, res) => {
   res.json(tasks);
 };
 
+// Create a new task
+const createTask = async (req, res) => {
+  const newTask = req.body;
+  const tasksCollection = await getTasksCollection();
+  const result = await tasksCollection.insertOne(newTask);
+  res.json(result);
+};
+
 // Update an existing task by ID
 const updateTask = async (req, res) => {
   const { id } = req.params;
@@ -32,6 +40,7 @@ const deleteTask = async (req, res) => {
 
 module.exports = {
   getAllTasks,
+  createTask,
   deleteTask,
   updateTask,
 };
